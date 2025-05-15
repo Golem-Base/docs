@@ -167,9 +167,124 @@ Ready to see more? This example barely cracks the surface. To see a full example
 
 # 🚗 Remove the rust with the Rust SDK
 
-Would you prefer to work with Rust? We got you covered!
+Would you prefer to work with Rust? We've got you covered!
 
-[Coming soon]
+First, follow the steps above for installing Golem-base Op-Geth, starting it under docker-compose, and creating and funding an account, all as described above under [TypeScript SDK](./README.md#-golembase-sdk-for-typescript).
+
+Now go ahead and clone our [Rust SDK](https://github.com/Golem-Base/rust-sdk).
+
+Next, inside the root folder for the repository, create a folder called `practice`.
+
+Move into that folder and create a file called `Cargo.toml`, and add the following to it:
+
+```toml
+[package]
+name = "golem-base-sdk-practice"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+alloy = "0.15"
+bytes = "1.0"
+dirs = "6.0"
+env_logger = "0.11"
+log = "0.4"
+tokio = { version = "1", features = ["full"] }
+
+golem-base-sdk = { workspace = true }
+```
+
+Now in the same folder create a subfolder called `src`. Move into `src` and inside `src` create a file called `main.rs`. Add the following to `main.rs`:
+
+```rust
+use dirs::config_dir;
+use golem_base_sdk::entity::{Create, EntityResult};
+use golem_base_sdk::{Address, Annotation, GolemBaseClient, Hash, PrivateKeySigner, Url};
+use log::info;
+use std::fs;
+
+async fn log_num_of_entities_owned(client: &GolemBaseClient, owner_address: Address) {
+    let n = client
+        .get_entities_of_owner(owner_address)
+        .await
+        .expect("Failed to fetch entities of owner")
+        .len();
+    info!("Number of entities owned: {}", n);
+}
+
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    env_logger::Builder::from_env(env_logger::Env::default().default_filter_or("info")).init();
+
+    let mut private_key_path = config_dir().ok_or("Failed to get config directory")?;
+    private_key_path.push("golembase/private.key");
+    let private_key_bytes = fs::read(&private_key_path)?;
+    let private_key = Hash::from_slice(&private_key_bytes);
+
+    let signer = PrivateKeySigner::from_bytes(&private_key)
+        .map_err(|e| format!("Failed to parse private key: {}", e))?;
+    let url = Url::parse("http://localhost:8545").unwrap();
+    let client = GolemBaseClient::builder()
+        .wallet(signer)
+        .rpc_url(url)
+        .build();
+
+    info!("Fetching owner address...");
+    let owner_address = client.get_owner_address();
+    info!("Owner address: {}", owner_address);
+    log_num_of_entities_owned(&client, owner_address).await;
+
+    info!("Creating entities...");
+    let creates = vec![
+        Create {
+            data: "foo".into(),
+            ttl: 25,
+            string_annotations: vec![Annotation::new("key", "foo")],
+            numeric_annotations: vec![Annotation::new("ix", 1u64)],
+        }
+    ];
+    let receipts: Vec<EntityResult> = client.create_entities(creates).await?;
+    info!("Created entities: {:?}", receipts);
+    log_num_of_entities_owned(&client, owner_address).await;
+
+    Ok(())
+}
+```
+
+Now move back to the root folder of the repository. Let's make the current Cargo.toml aware of our practice project. Open Cargo.toml and find the section that looks like this:
+
+```toml
+[workspace]
+members = [
+    "example",
+    "cli"
+]
+```
+
+Add a comma after `cli` and add an entry for `practice`:
+
+```toml
+[workspace]
+members = [
+    "example",
+    "cli",
+    "practice"
+]
+```
+
+Save the file. Now back in your shell, you can build the practice app by typing:
+
+```
+cargo build -p golem-base-sdk-practice
+```
+
+And run the app by typing:
+
+```
+cargo run -p golem-base-sdk-practice
+```
+
+(You can see a full example by looking in the `/example` folder as well as more in the `/examples` folder.)
 
 # 🚂 Ready to go go go with Go?
 
