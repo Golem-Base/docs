@@ -103,4 +103,4 @@ Congratulations\! You've now successfully:
 * Bridged from L2 "Erech" to L3 "Kaolin"  
 * Now you can experiment with L3 either by:  
   * [**Checking out dPaste**](https://dpaste.golem-base.io/) \- simple application built on top of Golem Base that allows you to save and share notes.   
-  * **Create your own app \-** by using [**Golem Base SDK**](https://github.com/Golem-Base/typescript-sdk/). We will provide more tutorials soon. 
+  * **Create your own app \-** by using [**Golem Base SDK**](https://github.com/Golem-Base/typescript-sdk/). More tutorials for builders will be provided in coming weeks. 
