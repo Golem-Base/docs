@@ -99,8 +99,8 @@ Let's check that your L3 setup is working:
 
 Congratulations\! You've now successfully:
 
-* Moved from Ethereum Holesky testnet to Golem Base L2 "Erech"  
-* Bridged from L2 "Erech" to L3 "Kaolin"  
-* Now you can experiment with L3 either by:  
+* Bridged test ETH from Ethereum Holesky testnet to Golem Base L2 "Erech"  
+* Bridged from Golem Base L2 testnet "Erech" to Golem Base L3 testnet "Kaolin"  
+* Now you can experiment with Golem Base L3 testnet either by:  
   * [**Checking out dPaste**](https://dpaste.golem-base.io/) \- simple application built on top of Golem Base that allows you to save and share notes.   
   * **Create your own app \-** by using [**Golem Base SDK**](https://github.com/Golem-Base/typescript-sdk/). More tutorials for builders will be provided in coming weeks. 
