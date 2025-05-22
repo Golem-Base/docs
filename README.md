@@ -16,6 +16,12 @@ As a first example, let's build a backend using our TypeScript SDK.
 
 (Note: As an alternative to installing the demo CLI, you can build the [actual CLI](https://github.com/Golem-Base/golembase-op-geth/blob/main/cmd/golembase/README.md) as it's included in the golembase-op-geth repo.)
 
+Start by creating a user:
+
+```
+golembase-demo-cli account create
+```
+
 When you create a user, it will generate a private key file called `private.key` and store it in your user's configuration area. (For example, on Linux, it will store it in `~/.config/golembase/`)
 
 You will also need to fund the account. You can do so by typing:
@@ -23,6 +29,8 @@ You will also need to fund the account. You can do so by typing:
 ```
 golembase-demo-cli account fund 10
 ```
+
+(You can learn more about golembase-demo-cli [at its GitHub repo](https://github.com/Golem-Base/golembase-demo-cli).)
 
 Here's how you can get going with the SDK. First, create a new folder to hold your project:
 
@@ -34,10 +42,10 @@ cd golem-sdk-practice
 Then create a new package.json and add the dependencies by typing:
 
 ```bash
-npm init -y & npm install --save-dev typescript && npm i golem-base-sdk
+npm init -y & npm install --save-dev typescript && npm i golem-base-sdk xdg-portable tslib
 ```
 
-**Important:** Next update your package.json file, changing the `type` member to `"type": "module",` and adding the two script lines for `build` and `start`. (You can leave the `name` member set to whatever it is. And the order of the members doesn't matter.)
+**Important:** Next update your package.json file, changing the `type` member to `"type": "module",` and adding the two script lines for `build` and `start`. (Don't forget to add the comma to the end of the "test" line.)
 
 ```json
 {
@@ -94,7 +102,7 @@ Next, open an editor and create a file called `index.ts` in the `src` folder. He
 ```ts
 import * as fs from "fs"
 import xdg from "xdg-portable"
-import { createClient, type GolemBaseClient, type GolemBaseCreate,
+import { createClient, type GolemBaseClient, type GolemBaseCreate, type AccountData,
   Annotation, Tagged } from "golem-base-sdk"
 import { formatEther } from "viem";
 
@@ -104,8 +112,12 @@ const encoder = new TextEncoder()
 const decoder = new TextDecoder()
 
 async function main() {
+  const key: AccountData = new Tagged("privatekey", keyBytes)
   const client: GolemBaseClient = await createClient(
-    new Tagged("privatekey", keyBytes), 'http://localhost:8545', 'ws://localhost:8546'
+    1337, // This is the chainID of the local dev server running in docker
+    key,  // The key information for your user
+    'http://localhost:8545', // The http address and port to connect to
+    'ws://localhost:8546'    // The ws address and port to connect to
   )
 
   async function numOfEntitiesOwned(): Promise<number> {
@@ -114,33 +126,39 @@ async function main() {
 
   const creates: GolemBaseCreate[] = [
     {
-      data: encoder.encode("foo"),
-      ttl: 25,
-      stringAnnotations: [new Annotation("key", "foo")],
-      numericAnnotations: [new Annotation("ix", 1)]
+      data: encoder.encode("foo"), // Some data to store as a payload
+      btl: 25, // Blocks to live
+      stringAnnotations: [new Annotation("key", "foo")], // A string value
+      numericAnnotations: [new Annotation("ix", 1)] // A numeric value
     },
     {
       data: encoder.encode("bar"),
-      ttl: 2,
+      btl: 2,
       stringAnnotations: [new Annotation("key", "bar")],
       numericAnnotations: [new Annotation("ix", 2)]
     }
   ]
   console.log('Creating entities!')
+  // Ask the client to send the entities to create to the server
   const receipts = await client.createEntities(creates)
 
+  // Have the client ask the server how many entities you now own
   console.log("Number of entities owned:", await numOfEntitiesOwned())
 
+  // Have the client ask to get your new balance after the entity creation
   console.log("Current balance: ", formatEther(await client.getRawClient().httpClient.getBalance({
     address: await client.getOwnerAddress(),
     blockTag: 'latest'
   })))
 
+  // Wait a moment for everything to complete.
   await (new Promise(resolve => setTimeout(resolve, 500)))
 
 }
 
+// We put everything inside a single main function because it's async.
 main()
+
 ```
 
 Next, build it by typing:
@@ -165,7 +183,7 @@ Ready to see more? This example barely cracks the surface. To see a full example
 
 * Look at the full [code on GitHub](https://github.com/Golem-Base/typescript-sdk) including more examples.
 
-# 🚗 Remove the rust with the Rust SDK
+# 🚗 Ready for the Rust SDK
 
 Would you prefer to work with Rust? We've got you covered!
 
@@ -285,24 +303,6 @@ cargo run -p golem-base-sdk-practice
 ```
 
 (You can see a full example by looking in the `/example` folder as well as more in the `/examples` folder.)
-
-# 🚂 Ready to go go go with Go?
-
-If you download our entire [Golem-base Op-Geth](https://github.com/Golem-Base/golembase-op-geth) project and install Go on your machine, you'll have everything you need to create applications in Go that interact with Geth.
-
-First, make sure you have [Go installed](https://go.dev/doc/install).
-
-Second, you'll want to install Golem-base Op-Geth, start it inside docker-compose, and create and fund an account as described above under [TypeScript SDK](./README.md#-golembase-sdk-for-typescript).
-
-Next, clone our Golem-Base Op-Geth repo, as this contains the Go libraries you'll need:
-
-```
-git clone https://github.com/Golem-Base/golembase-op-geth.git
-```
-
-You'll probably want to familiarize yourself with the folder structure. 
-
-[Coming soon]
 
 # 🧑‍🚀 Get Involved
 
