@@ -172,9 +172,16 @@ and run it by typing:
 You will see output similar to the following:
 
 ```
+freckleface@DESKTOP-N3E6T0C:~/dev/golem-sdk-practice$ npm run start
+
+> typescript_sdk_demo1@1.0.0 start
+> node dist/index.js
+
 Creating entities!
-Number of entities owned: 2
-Current balance:  99.99999999999814816
+Number of entities owned: 4
+Current balance:  9.99998713261566488
+
+freckleface@DESKTOP-N3E6T0C:~/dev/golem-sdk-practice$
 ```
 
 Ready to see more? This example barely cracks the surface. To see a full example:
