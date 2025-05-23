@@ -10,7 +10,7 @@ Golem Base is a Layer 2 network on Ethereum that solves the problem of how to ef
 
 Golem-base-op-geth is our customized Ethereum app (based on software called op-geth) that powers Golem Base. It extends op-geth to handle Golem Base transactions, enabling organizations to store structured data directly on the node. Data is written through secure, tamper-evident transactions and stored in the node's internal state. (A node refers to a single server running Ethereum software, whether it's the original op-geth, Golem-base Op-Geth, or any number of Ethereum installations.)
 
-When you're first learning how to use our tools, we recommend working with an existing testnet that we've installed. For those with some experience, however, you have the option of downloading and runniing our Golem-base Op-Geth software directly on your own computer. We provide instructions for installing and running it [later in this document](#working-with-a-local-golem-base-op-geth-installation-optional).
+When you're first learning how to use our tools, we recommend working with an existing testnet that we've installed. For those with some experience, however, you have the option of downloading and running our Golem-base Op-Geth software directly on your own computer. We provide instructions for installing and running it [later in this document](#working-with-a-local-golem-base-op-geth-installation-optional).
 
 # Configuration
 
