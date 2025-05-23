@@ -4,7 +4,7 @@ Ready to get started coding with our Golem tools? We offer several SDKs, each ta
 
 Regardless of which you choose, however, you'll need to do some initial configuration. But let's start with a brief overview of what Golem Base is and what our tools are.
 
-# Brief Overview of Golem Base
+# 📚 Brief Overview of Golem Base
 
 Golem Base is a Layer 2 network on Ethereum that solves the problem of how to efficiently store and manage structured data on an Ethereum-compatible node without relying on smart contracts. It offers a simple, low-cost alternative for handling operations like creating, updating, or deleting data.
 
@@ -12,7 +12,7 @@ Golem-base-op-geth is our customized Ethereum app (based on software called op-g
 
 When you're first learning how to use our tools, we recommend working with an existing testnet that we've installed. For those with some experience, however, you have the option of downloading and running our Golem-base Op-Geth software directly on your own computer. We provide instructions for installing and running it [later in this document](#working-with-a-local-golem-base-op-geth-installation-optional).
 
-# Configuration
+# ⚙️ Configuration
 
 To get started using Golem-Base you need to do some initial setup using our CLI tool, which we describe next.
 
@@ -306,7 +306,7 @@ Ready to see more? This example barely cracks the surface. To see a full example
 
 Would you prefer to work with Rust? Follow these steps to use our Rust SDK.
 
-First, follow the steps above for installing Golem-base Op-Geth, starting it under docker-compose, and creating and funding an account, all as described above under [TypeScript SDK](./README.md#-golembase-sdk-for-typescript).
+First, follow the steps above under [Configuration](#configuration).
 
 Now go ahead and clone our [Rust SDK](https://github.com/Golem-Base/rust-sdk) by typing:
 
@@ -429,7 +429,7 @@ cargo run -p golem-base-sdk-practice
 
 # 🐍 Using our Python SDK
 
-We also have a Python SDK if that's your language of choice.
+We also have a Python SDK if that's your language of choice. Start by following the steps above under [Configuration](#configuration).
 
 > Most systems already have python version 3 installed, available directly through the python command. Make sure by typing the following: 
 >
@@ -730,7 +730,7 @@ python main.py --instance local
 
 To see more examples, such as deleting entities and querying, visit our [Python SDK's repo on GitHub](https://github.com/Golem-Base/python-sdk).
 
-# Working with a local Golem-Base Op-geth installation (Optional)
+# 🧪 Working with a local Golem-Base Op-geth installation (Optional)
 
 If you prefer to work with a local installation of Golem-Base Op-geth instead of the testnet, you can use the following instructions.
 
@@ -856,7 +856,7 @@ Now you're ready to work with the local installation of golembase-op-geth. In th
 
 and replace the chainID (the first parameter to createClient) with 1337.
 
-# Troubleshooting
+# 🛠️ Troubleshooting
 
 * Docker not starting
 
