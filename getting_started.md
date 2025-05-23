@@ -866,6 +866,9 @@ and replace the chainID (the first parameter to createClient) with 1337.
 
 * RPC not responding
 
+# What's Next?
+
+Now is your chance to build something! Pick your SDK from above, and start practicing. Head over to the full documentation for the SDK of your choice and pratice removing and updating entities. Try out the querying system. And as you do, think about what you could build with the Golem-Base SDKs!
 
 # 🧑‍🚀 Get Involved
 
