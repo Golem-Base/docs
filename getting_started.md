@@ -354,41 +354,43 @@ async fn log_num_of_entities_owned(client: &GolemBaseClient, owner_address: Addr
 }
 
 #[tokio::main]
-async fn main() -> Result<(), Box<dyn std::error::Error>> {
+async fn main() {
     env_logger::Builder::from_env(env_logger::Env::default().default_filter_or("info")).init();
 
-    let mut private_key_path = config_dir().ok_or("Failed to get config directory")?;
+    let mut private_key_path = config_dir().expect("Failed to get config directory");
     private_key_path.push("golembase/private.key");
-    let private_key_bytes = fs::read(&private_key_path)?;
+
+    let private_key_bytes = fs::read(&private_key_path).expect("Failed to read private key file");
+
     let private_key = Hash::from_slice(&private_key_bytes);
 
-    let signer = PrivateKeySigner::from_bytes(&private_key)
-        .map_err(|e| format!("Failed to parse private key: {}", e))?;
-    let url = Url::parse("https://rpc.kaolin.holesky.golem-base.io/").unwrap();
-    let client = GolemBaseClient::builder()
-        .wallet(signer)
-        .rpc_url(url)
-        .build();
+    let signer = PrivateKeySigner::from_bytes(&private_key).expect("Failed to parse private key");
+
+    let url = Url::parse("https://rpc.kaolin.holesky.golem-base.io/").expect("Invalid RPC URL");
+
+    let client = GolemBaseClient::builder().wallet(signer).url(url).build();
 
     info!("Fetching owner address...");
     let owner_address = client.get_owner_address();
     info!("Owner address: {}", owner_address);
+
     log_num_of_entities_owned(&client, owner_address).await;
 
     info!("Creating entities...");
-    let creates = vec![
-        Create {
-            data: "foo".into(),
-            ttl: 25,
-            string_annotations: vec![Annotation::new("key", "foo")],
-            numeric_annotations: vec![Annotation::new("ix", 1u64)],
-        }
-    ];
-    let receipts: Vec<EntityResult> = client.create_entities(creates).await?;
+    let creates = vec![Create {
+        data: "foo".into(),
+        ttl: 25,
+        string_annotations: vec![Annotation::new("key", "foo")],
+        numeric_annotations: vec![Annotation::new("ix", 1u64)],
+    }];
+
+    let receipts: Vec<EntityResult> = client
+        .create_entities(creates)
+        .await
+        .expect("Failed to create entities");
+
     info!("Created entities: {:?}", receipts);
     log_num_of_entities_owned(&client, owner_address).await;
-
-    Ok(())
 }
 ```
 
