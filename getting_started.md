@@ -8,17 +8,17 @@ Regardless of which you choose, however, you'll need to do some initial configur
 
 Golem Base is a Layer 2 network on Ethereum that solves the problem of how to efficiently store and manage structured data on an Ethereum-compatible node without relying on smart contracts. It offers a simple, low-cost alternative for handling operations like creating, updating, or deleting data.
 
-Golem-base-op-geth is our customized Ethereum app (based on software called op-geth) that powers Golem Base. It extends op-geth to handle Golem Base transactions, enabling organizations to store structured data directly on the node. Data is written through secure, tamper-evident transactions and stored in the node's internal state. (A node refers to a single server running Ethereum software, whether it's the original op-geth, Golem-base Op-Geth, or any number of Ethereum installations.)
+Golem-base-geth is our customized Ethereum client (based on software called op-geth) that powers Golem Base. It extends op-geth to handle Golem Base transactions, enabling organizations to store structured data directly on the node. Data is written through secure, tamper-evident transactions and stored in the node's internal state. (A node refers to a single server running Ethereum software, whether it's the original op-geth, Golem-base-geth, or any number of Ethereum installations.)
 
-When you're first learning how to use our tools, we recommend working with an existing testnet that we've installed. For those with some experience, however, you have the option of downloading and running our Golem-base Op-Geth software directly on your own computer. We provide instructions for installing and running it [later in this document](#working-with-a-local-golem-base-op-geth-installation-optional).
+When you're first learning how to use our tools, we recommend working with an existing testnet that we've installed. For those with some experience, however, you have the option of downloading and running our Golem-base-geth software directly on your own computer. We provide instructions for installing and running it [later in this document](#-working-with-a-local-golem-base-geth-installation-optional).
 
 # ⚙️ Configuration
 
 To get started using Golem-Base you need to do some initial setup using our CLI tool, which we describe next.
 
-## Op-Get CLI Tool
+## Golem-base-geth CLI Tool
 
-As part of our Golem-Base Op-Geth software, we've built a command-line tool through which you can interact with a node.
+As part of our Golem-base-geth software, we've built a command-line tool through which you can interact with a node.
 
 If you're on the Mac, run the following to install it:
 
@@ -81,7 +81,7 @@ private.key
 Next you need to fund your account. While creating the account builds a local file, the funding depends on the node you're going to attach to. If you're going to use our test net, you need to open our faucet in your browser; however, first you'll need your Ethereum address. There are different ways to extract it from your private.key file, but the easiest for right now is to ask the CLI tool to get it for you. Simply type:
 
 ```
-golembase-demo-cli account balance
+golembase-demo-cli account balance --node-url https://rpc.kaolin.holesky.golem-base.io/
 ```
 
 You'll see an output that includes your address, along with a zero balance, similar to this:
@@ -732,17 +732,17 @@ python main.py --instance local
 
 To see more examples, such as deleting entities and querying, visit our [Python SDK's repo on GitHub](https://github.com/Golem-Base/python-sdk).
 
-# 🧪 Working with a local Golem-Base Op-geth installation (Optional)
+# 🧪 Working with a local Golem-base-geth installation (Optional)
 
-If you prefer to work with a local installation of Golem-Base Op-geth instead of the testnet, you can use the following instructions.
+If you prefer to work with a local installation of Golem-base-geth instead of the testnet, you can use the following instructions.
 
-## Installing Golem-Base and Docker
+## Installing Golem-base-geth and Docker
 
-Golem-base Op-Geth can be run inside a docker container as an Ethereum node, and optionally as a "development server" called "dev mode." Running in dev mode is a great option for learning how to use our SDKs. To run it, you'll need to make sure Docker is installed.
+Golem-base-geth can be run inside a docker container as an Ethereum node, and optionally as a "development server" called "dev mode." Running in dev mode is a great option for learning how to use our SDKs. To run it, you'll need to make sure Docker is installed.
 
 ## Installing Docker
 
-If you're going to run Golem-base Op-Geth inside docker, first you'll need to install docker. Follow the [docker installation instructions here](https://docs.docker.com/engine/install/).
+If you're going to run Golem-base-geth inside docker, first you'll need to install docker. Follow the [docker installation instructions here](https://docs.docker.com/engine/install/).
 
 Note: When installing Docker on Linux (or using it from within Windows Subsystem for Linux), after installation you'll need to follow [these post-install instructions](https://docs.docker.com/engine/install/linux-postinstall/) so that you can use docker from your own user without having to use sudo.
 
@@ -760,17 +760,17 @@ docker-compose
 
 Tip: If you're running an older version of docker, make sure you either have [docker-compose installed](https://docs.docker.com/compose/install/standalone/), in which case you'll use the `docker-compose` command; or update to the latest version of docker, in which case you'll use the `docker compose` command.
 
-## Installing Golem-Base Op-Geth
+## Installing Golem-base-geth
 
-In order to run Golem-Base Op-Geth inside Docker, you'll need to clone the repository from GitHub. For that, you can either clone it, which requires git, or download and unzip it.
+In order to run Golem-base-geth inside Docker, you'll need to clone the repository from GitHub. For that, you can either clone it, which requires git, or download and unzip it.
 
-If you prefer to clone it, you'll need to have [git installed](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git). Then in your shell, switch to a folder you want to hold the Golem-Base Op-Geth folder, and type:
+If you prefer to clone it, you'll need to have [git installed](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git). Then in your shell, switch to a folder you want to hold the Golem-base-geth folder, and type:
 
 git clone https://github.com/Golem-Base/golembase-op-geth.git
 
-Or, alternatively, you can download and unzip the code; to do so, head over to the [golem-base-op-geth repository](https://github.com/Golem-Base/golembase-op-geth) and click the green Code button; in the panel that opens, click Download ZIP. From there, unzip the file into a folder of your choice.
+Or, alternatively, you can download and unzip the code; to do so, head over to the [Golem-base-geth repository](https://github.com/Golem-Base/golembase-op-geth) and click the green Code button; in the panel that opens, click Download ZIP. From there, unzip the file into a folder of your choice.
 
-## Running Golem-Base Op-Geth
+## Running Golem-base-geth
 
 Switch to the root folder of the code you just installed. Verify that you're in the folder that contains the file called `docker-compose.yml`.
 
@@ -798,7 +798,7 @@ docker ps
 
 You should see a listing of the various containers running. There should be five containers running; the second column, called image, should read (in any order):
 
-* golembase-op-geth_op-geth: This is our main Golem-base Op-Geth software
+* golembase-op-geth_op-geth: This is our main Golem-base-geth software
 
 * mongo:8.0.6: This is the MongoDB database software
 
@@ -806,12 +806,12 @@ You should see a listing of the various containers running. There should be five
 
 * golembase-op-geth_sqlite-etl: This is the sqlite database software
 
-* dmilhdef/rpcplorer:v0.0.1: This is a software package for exploring the data in Golem-base Op-geth. (We won't be using this in this tutorial.)
+* dmilhdef/rpcplorer:v0.0.1: This is a software package for exploring the data in Golem-base-geth. (We won't be using this in this tutorial.)
 
 
-## Funding a local instance of Golem-Base Op-geth
+## Funding a local instance of Golem-base-geth
 
-Next you'll need to fund your account on the local node using Golem-base Op-geth's own built-in command-line tool. This is an expanded form of the golembase-demo-cli tool in that it includes funding capabilities.
+Next you'll need to fund your account on the local node using Golem-base-geth's own built-in command-line tool. This is an expanded form of the golembase-demo-cli tool in that it includes funding capabilities.
 
 To use this tool requires that you first install the Go language tools. Follow the instructions ][here](https://go.dev/doc/install) and verify the installation by running:
 
@@ -819,7 +819,7 @@ To use this tool requires that you first install the Go language tools. Follow t
 go version
 ```
 
-Next, drill down into the golembase-op-geth source code that you downloaded; go to the cmd/golembase folder. Type
+Next, drill down into the Golem-base-geth source code that you downloaded; go to the cmd/golembase folder. Type
 
 ```
 ls
@@ -850,7 +850,7 @@ go run main.go account fund 10
 
 There won't be any output. Now repeat the above `account balance` command and you should see funds present.
 
-Now you're ready to work with the local installation of golembase-op-geth. In the preceding SDK samples (except for the Python example, which already provides both our testnet and local as command lines options), replace the URLs with localhost and the following ports:
+Now you're ready to work with the local installation of Golem-base-geth. In the preceding SDK samples (except for the Python example, which already provides both our testnet and local as command lines options), replace the URLs with localhost and the following ports:
 
 * http://localhost:8545 for the http address
 
