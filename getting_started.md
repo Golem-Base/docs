@@ -20,11 +20,15 @@ To get started using Golem-Base you need to do some initial setup using our CLI 
 
 As part of our Golem-base-geth software, we've built a command-line tool through which you can interact with a node.
 
+### Installing the CLI tool for Mac
+
 If you're on the Mac, run the following to install it:
 
 ```
 brew install Golem-Base/demo/golembase-demo-cli
 ```
+
+### Installing the CLI tool for Linux
 
 If you're on Linux, visit our [Releases page](https://github.com/Golem-Base/golembase-demo-cli/releases/). Scroll down to the first instance of Assets, and click it if it's not already expanded. Under Assets, pick the version you need, either Arm or Intel x86/64. Download the file and extract its contents into a folder of your choosing using the following command:
 
@@ -47,6 +51,19 @@ sudo cp golembase-demo-cli /usr/local/bin
 ```
 
 You can now delete the downloaded file as well as the unzipped contents.
+
+### Installing the CLI tool for Windows
+
+If you're on Windows, you have two options:
+
+1. Use a Linux distro under Windows Subsytem for Windows, and then follow the instructions above for Linux.
+2. Install the Go language (find instructions [here](https://go.dev/doc/install)), and then type the following command:
+
+```
+go install github.com/Golem-Base/golembase-demo-cli@latest
+```
+
+This command will install golembase-demo-cli in the folder C:\Users\\[username]\\go\bin, and add that folder to your path.
 
 ## Creating an account and funding it
 
