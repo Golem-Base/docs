@@ -2,6 +2,20 @@
 
 The [TypeScript SDK](https://github.com/Golem-Base/typescript-sdk) allows you to write code in TypeScript that interfaces with a Golem-base-geth node, allowing you to store entities, update them, and delete them.
 
+In the following instructions, we will:
+
+1. Set up your environment for both node.js and TyepScript
+
+2. Create some TypeScript code that will generate a private key file that's needed for connecting to a the Golem-base-geth node; this private.key file also contains an Ethereum address embedded in it
+
+3. Optionally run the code (unless you already have a private.key file)
+
+4. Add funds using the address embedded in the private.key file
+
+5. Create TypeScript code that connects to the node, stores two entities, and retrieves them.
+
+This will provide an easy starting point that you can build on for your own applications.
+
 ## Configure the TypeScript environment
 
 Let's configure your environment. Start by creating a new folder to hold your project:
