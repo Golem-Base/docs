@@ -14,8 +14,6 @@ In the following instructions, we will:
 
 5. Create TypeScript code that connects to the node on Kaolin, stores two entities, and retrieves them.
 
-6. We also provide an optional bonus section that contains code for checking your balance.
-
 This will provide an easy starting point that you can build on for your own applications.
 
 ## Configure the TypeScript environment
@@ -245,6 +243,18 @@ async function main() {
 		console.log(storage);
 
 	}
+
+	// Print out the balance
+
+	const address = await client.getOwnerAddress();
+
+	const balanceWei = await client.getRawClient().httpClient.getBalance({
+		address: address,
+		blockTag: 'latest'
+	});
+
+	console.log(`Balance for address ${address} (Wei, Eth):`);
+	console.log(`${balanceWei} Wei, ${balanceWei / 10n ** 18n} Eth`);
 	
 }
 
@@ -282,57 +292,7 @@ Back in main, we then loop through the receipts, making two calls to the server:
 
 We then print out the results of each call.
 
-Ready to explore even more? Check out our full TypeScript SDK example in the [TypeScript SDK Repository](https://github.com/Golem-Base/typescript-sdk).
+And finally, we check the balance and print it out in both Wei and Eth format.
 
-## Bonus Section: Checking Your Balance
-
-Need to check your balance? Let's add a file that does that as well. First, you'll need to update your package.json file; after the existing "scripts" items, add another line (remember to add a comma at the end of the one for wallet):
-
-```
-"balance": "node dist/balance.js"
-```
-
-Next, we need to add another package; type the following:
-
-```
-npm install web3
-```
-
-Now create a file in the `src` folder called `balance.ts` and add the following code to it:
-
-```ts
-import Web3 from 'web3';
-
-const address = process.argv[2];
-if (!address) {
-  console.error('Usage: ts-node checkBalance.ts <address>');
-  process.exit(1);
-}
-
-const web3 = new Web3('https://rpc.kaolin.holesky.golem-base.io');
-
-async function main() {
-	try {
-		const balance = await web3.eth.getBalance(address);
-		console.log(`Balance of ${address}: ${web3.utils.fromWei(balance, 'ether')} ETH`);
-	}
-	catch (e) {
-		console.error('Error:', (e as Error).message);
-	}
-}
-
-main()
-```
-
-Build the whole project:
-
-```
-npm run build
-```
-
-And run this code, including your address:
-
-```
-npm run balance <address starting with 0x>
-```
+Ready to explore even more? Check out our full TypeScript SDK example that includes more calls into our API, and complete logging, in the [TypeScript SDK Repository](https://github.com/Golem-Base/typescript-sdk).
 
