@@ -648,7 +648,6 @@ from golem_base_sdk import (
     GolemBaseExtend,
     GolemBaseUpdate,
 )
-# from xdg import BaseDirectory
 
 logging.config.dictConfig(
     {
