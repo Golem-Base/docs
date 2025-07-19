@@ -71,13 +71,13 @@ Let's verify everything is working:
 
 Now let's move some test ETH from L2 "Erech" to L3 "Kaolin":
 
-* While still on the "Erech" network, send the desired amount of your L2 test ETH to L3 bridge: 0x5c857718caea1f6e9b0a7adf1415d0b98b6498d0
+* While still on the "Erech" network, send the desired amount of your L2 test ETH to L3 bridge: 0x493e4fdCd3750B456ad798981f50b9c63E56d790
 
 * This will bridge your test ETH from L2 to Golem Base L3 testnet "Kaolin"
 
 * You can track your bridge transactions using bridging monitoring tool:
 
-* Visit [https://bridgette.kaolin.holesky.golem-base.io/](https://bridgette.kaolin.holesky.golem-base.io/) to check if your L2→L3 bridge transaction is still pending or has been finalized. You’ll see a list of recent transactions associated with your wallet address.
+* Visit [https://kaolin.holesky.golem-base.io/bridgette/](https://kaolin.holesky.golem-base.io/bridgette/) to check if your L2→L3 bridge transaction is still pending or has been finalized. You’ll see a list of recent transactions associated with your wallet address.
 
 ## **Step 6: Add Golem Base L3 Testnet to MetaMask / Wallet**
 
